@@ -29,7 +29,7 @@ def create_app():
     
     # Initialize extensions
     db.init_app(app)
-    CORS(app, origins=app.config['CORS_ORIGINS'], supports_credentials=True)
+    CORS(app, origins=app.config['CORS_ORIGINS'], supports_credentials=True, methods=["GET", "POST", "PATCH", "OPTIONS"])
     
     # Register blueprints
     app.register_blueprint(public_bp)
