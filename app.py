@@ -14,37 +14,37 @@ from routes import public_bp, admin_bp
 from seed_data import seed_database
 
 def create_app():
-    """Create and configure Flask application"""
     app = Flask(__name__)
-
 
     env = os.environ.get("FLASK_ENV", "development")
 
     if env == "production":
         app.config.from_object(ProductionConfig)
     else:
-        # app.config.from_object(Config)
         app.config.from_object(DevelopmentConfig)
 
-    
-    # Initialize extensions
     db.init_app(app)
-    CORS(app, origins=app.config['CORS_ORIGINS'], supports_credentials=True, methods=["GET", "POST", "PATCH", "OPTIONS"])
-    
-    # Register blueprints
+
+    # REGISTER BLUEPRINTS FIRST
     app.register_blueprint(public_bp)
     app.register_blueprint(admin_bp)
-    
-    # Initialize database
+
+    # APPLY CORS AFTER ROUTES EXIST
+    CORS(
+        app,
+        origins=app.config["CORS_ORIGINS"],
+        supports_credentials=True,
+        methods=["GET", "POST", "PATCH", "OPTIONS"],
+    )
+
     with app.app_context():
         db.create_all()
-        
-        # Seed database if empty
         from models import MenuItem
         if MenuItem.query.count() == 0:
             seed_database()
-    
+
     return app
+
 
 app = create_app()
 
