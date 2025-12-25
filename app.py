@@ -34,7 +34,7 @@ def create_app():
         app,
         resources={r"/*": {"origins": app.config["CORS_ORIGINS"]}},
         supports_credentials=True,
-        allow_headers=["Content-Type", "Authorization"],
+        allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
         methods=["GET", "POST", "PATCH", "OPTIONS"]
     )
 
