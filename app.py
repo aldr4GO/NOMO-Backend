@@ -32,7 +32,7 @@ def create_app():
     # APPLY CORS AFTER ROUTES EXIST
     CORS(
         app,
-        origins=app.config['CORS_ORIGINS'],
+        resources={r"/*": {"origins": app.config["CORS_ORIGINS"]}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization"],
         methods=["GET", "POST", "PATCH", "OPTIONS"]

@@ -51,7 +51,7 @@ def get_status():
     return jsonify(status.to_dict())
 
 
-@public_bp.route('/menu', methods=['GET'])
+@public_bp.route('/menu', methods=['GET', 'OPTIONS'])
 def get_menu():
     """Get all menu items"""
     items = MenuItem.query.filter_by(is_available=True).all()
