@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 import os
 import sys
+from config import DevelopmentConfig, ProductionConfig
 
 # Add backend directory to path
 backend_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,7 +16,16 @@ from seed_data import seed_database
 def create_app():
     """Create and configure Flask application"""
     app = Flask(__name__)
-    app.config.from_object(Config)
+
+
+    env = os.environ.get("FLASK_ENV", "development")
+
+    if env == "production":
+        app.config.from_object(ProductionConfig)
+    else:
+        # app.config.from_object(Config)
+        app.config.from_object(DevelopmentConfig)
+
     
     # Initialize extensions
     db.init_app(app)
