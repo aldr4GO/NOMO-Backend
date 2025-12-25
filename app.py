@@ -14,6 +14,16 @@ from routes import public_bp, admin_bp
 from seed_data import seed_database
 
 def create_app():
+        # Add a test route to check CORS headers
+    @app.route('/cors-test')
+    def cors_test():
+        return {"message": "CORS test successful"}
+
+    # Log response headers for every request
+    @app.after_request
+    def after_request(response):
+        print("Response Headers:", dict(response.headers))
+        return response
     app = Flask(__name__)
     print("app = Flask(__name__)")
 
