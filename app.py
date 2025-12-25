@@ -8,8 +8,8 @@ from config import DevelopmentConfig, ProductionConfig
 backend_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, backend_dir)
 
-from models import db
 from config import Config
+from models import db
 from routes import public_bp, admin_bp
 from seed_data import seed_database
 
