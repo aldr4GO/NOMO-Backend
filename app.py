@@ -16,7 +16,7 @@ from seed_data import seed_database
 def create_app():
     app = Flask(__name__)
 
-    env = os.environ.get("FLASK_ENV", "development")
+    env = os.environ.get("FLASK_ENV", "production")
 
     if env == "production":
         app.config.from_object(ProductionConfig)
@@ -35,6 +35,7 @@ def create_app():
         resources={r"/*": {"origins": app.config["CORS_ORIGINS"]}},
         supports_credentials=True,
         allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
+        origins=["https://nomo-frontend.vercel.app"],
         methods=["GET", "POST", "PATCH", "OPTIONS"]
     )
 
