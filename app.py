@@ -32,9 +32,10 @@ def create_app():
     # APPLY CORS AFTER ROUTES EXIST
     CORS(
         app,
-        origins=app.config["CORS_ORIGINS"],
+        origins=app.config['CORS_ORIGINS'],
         supports_credentials=True,
-        methods=["GET", "POST", "PATCH", "OPTIONS"],
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PATCH", "OPTIONS"]
     )
 
     with app.app_context():
@@ -45,11 +46,5 @@ def create_app():
 
     return app
 
-
-
-if __name__ == '__main__':
-    app = create_app()
-    # port = int(os.environ.get('PORT', 5000))
-    # app.run(host='0.0.0.0', port=port, debug=True)
-    app.run()
+app = create_app()
 
