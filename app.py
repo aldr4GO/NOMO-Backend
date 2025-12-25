@@ -36,11 +36,8 @@ def create_app():
     # APPLY CORS AFTER ROUTES EXIST
     CORS(
         app,
-        resources={r"/*": {"origins": app.config["CORS_ORIGINS"]}},
-        supports_credentials=True,
-        allow_headers=["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
-        origins=["https://nomo-frontend.vercel.app"],
-        methods=["GET", "POST", "PATCH", "OPTIONS"]
+        resources={r"/*": {"origins": ["https://nomo-frontend.vercel.app"]}},
+        supports_credentials=True
     )
     with app.app_context():
         db.create_all()
