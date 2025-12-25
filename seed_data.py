@@ -1,5 +1,6 @@
 from models import db, MenuItem, RestaurantStatus, MerchantAccount, AdminUser
 from universal_items import get_universal_items
+import os
 
 def seed_database():
     """Initialize database with seed data"""
@@ -36,7 +37,7 @@ def seed_database():
     
     # Merchant UPI Accounts (placeholder)
     merchants = [
-        {'name': 'Primary UPI', 'upi_id': 'merchant1@paytm', 'is_active': True},
+        {'name': 'TV', 'upi_id': f'{os.environ.get("UPI")}', 'is_active': True},
         {'name': 'Backup UPI 1', 'upi_id': 'merchant2@phonepe', 'is_active': False},
         {'name': 'Backup UPI 2', 'upi_id': 'merchant3@ybl', 'is_active': False},
     ]
@@ -54,7 +55,7 @@ def seed_database():
     
     # Admin User
     admin = AdminUser(username='admin')
-    admin.set_password('admin123')
+    admin.set_password('nomonomore')
     db.session.add(admin)
     
     db.session.commit()
