@@ -45,7 +45,7 @@ def create_app():
     app.register_blueprint(admin_bp)
 
     # APPLY CORS AFTER ROUTES EXIST
-    CORS(
+    cors = CORS(
         app,
         resources={r"/*": {"origins": ["https://nomo-frontend.vercel.app"]}},
         supports_credentials=True
