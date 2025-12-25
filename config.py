@@ -16,5 +16,10 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
-    if not os.environ.get("SECRET_KEY"):
+    SECRET_KEY = os.environ.get("SECRET_KEY")  # must be set in env
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    CORS_ORIGINS =  os.environ.get("CORS_ORIGINS") # your frontend URL
+
+    if not SECRET_KEY:
         raise RuntimeError("SECRET_KEY must be set in production")
+
