@@ -30,27 +30,21 @@ def create_app():
 
     print(f"env={env}")
 
+    app.config.update(
+        SESSION_COOKIE_SECURE=True,
+        SESSION_COOKIE_SAMESITE="None"
+    )
+
     # =========================================================================
     # FIX #1: Initialize CORS BEFORE registering blueprints
     # =========================================================================
     # This ensures flask-cors can properly wrap all routes as they're registered
     CORS(
         app,
-        resources={
-            r"/*": {
-                "origins": [ALLOWED_ORIGIN],
-                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-                "allow_headers": [
-                    "Content-Type",
-                    "Authorization",
-                    "Access-Control-Allow-Credentials",
-                    "Access-Control-Allow-Origin",
-                    "X-Requested-With"
-                ],
-                "supports_credentials": True,
-                "expose_headers": ["Content-Type", "Authorization"]
-            }
-        }
+        supports_credentials=True,
+        origins=["https://nomo-frontend.vercel.app"],
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"]
     )
 
     # Initialize database
@@ -67,20 +61,20 @@ def create_app():
     # =========================================================================
     # This acts as a safety net to ensure CORS headers are always present,
     # especially for preflight OPTIONS requests
-    @app.after_request
-    def after_request(response):
-        # Always add CORS headers to every response
-        response.headers.add('Access-Control-Allow-Origin', ALLOWED_ORIGIN)
-        response.headers.add('Access-Control-Allow-Headers', 
-                           'Content-Type, Authorization, X-Requested-With')
-        response.headers.add('Access-Control-Allow-Methods', 
-                           'GET, POST, PUT, DELETE, OPTIONS, PATCH')
-        response.headers.add('Access-Control-Allow-Credentials', 'true')
+    # @app.after_request
+    # def after_request(response):
+    #     # Always add CORS headers to every response
+    #     response.headers.add('Access-Control-Allow-Origin', ALLOWED_ORIGIN)
+    #     response.headers.add('Access-Control-Allow-Headers', 
+    #                        'Content-Type, Authorization, X-Requested-With')
+    #     response.headers.add('Access-Control-Allow-Methods', 
+    #                        'GET, POST, PUT, DELETE, OPTIONS, PATCH')
+    #     response.headers.add('Access-Control-Allow-Credentials', 'true')
         
-        # For debugging - can be removed in production
-        print("Response Headers:", dict(response.headers))
+    #     # For debugging - can be removed in production
+    #     print("Response Headers:", dict(response.headers))
         
-        return response
+    #     return response
 
     # =========================================================================
     # FIX #4: Explicit OPTIONS handler for preflight requests

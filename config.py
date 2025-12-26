@@ -16,8 +16,11 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
-    SECRET_KEY = os.environ.get("SECRET_KEY")  # must be set in env
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+
+    SECRET_KEY = 'qazxswedcvfrtgbnhyujm'  # must be set in env
+    # SECRET_KEY = os.environ.get("SECRET_KEY")  # must be set in env
+    SQLALCHEMY_DATABASE_URI = "postgresql://momo_orders_db_user:WtwwVZ0Z3cqBkWyJpasBrNeNKs8O6ogt@dpg-d568t7mmcj7s73fonjlg-a/momo_orders_db"
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     # CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",")
     CORS_ORIGINS = ["https://nomo-frontend.vercel.app", "http://localhost:5173"]
 
