@@ -19,7 +19,12 @@ def seed_database():
         'Paneer Ragi Momos',
         'Paneer Oats Momos',
         'Chicken Ragi Momos',
-        'Chicken Oats Momos'
+        'Chicken Oats Momos',
+        'Spinach Cheese Corn',
+        'Mushroom Cheese',
+        'Chicken Lemon',
+        'Chicken Teriyaki',
+        'Chicken Chilly Oil'
     ]
     
     universal_items = get_universal_items()
