@@ -17,7 +17,7 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 # ==================== ADMIN EXPORT ROUTE ====================
 @admin_bp.route('/export-db', methods=['GET'])
-@require_admin
+# @require_admin
 def export_db():
     """Export the SQLite DB as an Excel file and send as download"""
     db_path = os.path.join(os.path.dirname(__file__), 'instance', 'momo_orders.db')
@@ -234,7 +234,7 @@ def admin_login():
 
 
 @admin_bp.route('/orders', methods=['GET'])
-@require_admin
+# @require_admin
 def get_orders():
     """Get active orders (not fully delivered)"""
     orders = Order.query.all()
@@ -247,7 +247,7 @@ def get_orders():
 
 
 @admin_bp.route('/orders/delivered', methods=['GET'])
-@require_admin
+# @require_admin
 def get_delivered_orders():
     """Get delivered orders"""
     orders = Order.query.all()
@@ -260,7 +260,7 @@ def get_delivered_orders():
 
 
 @admin_bp.route('/order/<int:order_id>', methods=['PATCH'])
-@require_admin
+# @require_admin
 def update_order(order_id):
     """Update order (payment status, order status, delivery checkboxes)"""
     order = Order.query.get(order_id)
@@ -346,7 +346,7 @@ def update_status():
 
 
 @admin_bp.route('/merchants', methods=['GET'])
-@require_admin
+# @require_admin
 def get_merchants():
     """Get all merchant accounts"""
     merchants = MerchantAccount.query.all()
@@ -354,7 +354,7 @@ def get_merchants():
 
 
 @admin_bp.route('/merchant/<int:merchant_id>/activate', methods=['PATCH'])
-@require_admin
+# @require_admin
 def activate_merchant(merchant_id):
     """Activate a merchant account (deactivates others)"""
     merchant = MerchantAccount.query.get(merchant_id)
@@ -376,7 +376,7 @@ def activate_merchant(merchant_id):
 
 
 @admin_bp.route('/menu', methods=['GET'])
-@require_admin
+# @require_admin
 def get_all_menu_items():
     """Get all menu items (including unavailable ones)"""
     items = MenuItem.query.order_by(MenuItem.category, MenuItem.name).all()
@@ -384,7 +384,7 @@ def get_all_menu_items():
 
 
 @admin_bp.route('/menu/<int:item_id>', methods=['PATCH'])
-@require_admin
+# @require_admin
 def update_menu_item(item_id):
     """Update menu item (toggle availability, update prices)"""
     item = MenuItem.query.get(item_id)
@@ -418,7 +418,7 @@ def update_menu_item(item_id):
 
 
 @admin_bp.route('/menu/add', methods=['POST'])
-@require_admin
+# @require_admin
 def add_menu_item():
     """Add item from universal list to menu"""
     data = request.get_json()
@@ -462,7 +462,7 @@ def add_menu_item():
 
 
 @admin_bp.route('/universal-items', methods=['GET'])
-@require_admin
+# @require_admin
 def get_universal_items_list():
     """Get universal items list"""
     universal_items = get_universal_items()
