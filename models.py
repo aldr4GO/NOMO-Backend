@@ -108,7 +108,7 @@ class RestaurantStatus(db.Model):
     __tablename__ = 'restaurant_status'
     
     id = db.Column(db.Integer, primary_key=True)
-    is_open = db.Column(db.Boolean, default=True, nullable=False)
+    is_open = db.Column(db.Boolean, default=False, nullable=False)
     pause_message = db.Column(db.Text, default='We are having multiple orders. This may take time.', nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
