@@ -55,7 +55,7 @@ def seed_database():
     
     # Admin User
     admin = AdminUser(username='admin')
-    admin.set_password('nomonomore')
+    admin.set_password('admin123')
     db.session.add(admin)
     
     db.session.commit()
